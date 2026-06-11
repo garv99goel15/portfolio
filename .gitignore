@@ -1,0 +1,11 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (only the dev server; no deps required)
+node_modules/
+
+# Local scratch
+_*.png
+.playwright-mcp/

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0418" />
+  <meta name="description" content="Garv Goel — Software Engineer at MAQ Software. Building scalable, high-performance backend systems in C# / ASP.NET Core." />
+  <title>Garv Goel — Software Engineer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Three.js as ES module via import map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- Animation libraries (UMD globals) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+  <!-- ░░░ Custom cursor ░░░ -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <!-- ░░░ Preloader ░░░ -->
+  <div class="loader" id="loader">
+    <div class="loader__scene">
+      <div class="loader__horizon"></div>
+      <div class="loader__orb"></div>
+    </div>
+    <div class="loader__top">Loading 6 phases</div>
+    <h1 class="loader__brand" id="loaderBrand">GARV</h1>
+    <div class="loader__count"><span id="loaderCount">0</span><span class="loader__pct">%</span></div>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <button class="loader__enter" id="enterBtn" type="button">Click to enter</button>
+    <div class="loader__hint">Headphones recommended</div>
+  </div>
+
+  <!-- ░░░ WebGL canvas ░░░ -->
+  <div class="webgl" id="webgl" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ░░░ Header ░░░ -->
+  <header class="header" id="header">
+    <a href="#hero" class="brand" data-scroll aria-label="GARV — home">
+      <span class="brand__mark">✦</span>
+      <span class="brand__name">GARV</span>
+    </a>
+    <div class="header__right">
+      <button class="sound" id="soundBtn" type="button" aria-pressed="false">
+        <span class="sound__label">Sound</span>
+        <span class="sound__bars"><i></i><i></i><i></i><i></i></span>
+      </button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false">
+        <span class="menu-btn__text" data-open="Menu" data-close="Close">Menu</span>
+        <span class="menu-btn__lines"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ░░░ Fullscreen menu overlay ░░░ -->
+  <nav class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay__nav">
+      <a href="#hero" class="overlay__link" data-scroll><span>Home</span></a>
+      <a href="#about" class="overlay__link" data-scroll><span>About</span></a>
+      <a href="#work" class="overlay__link" data-scroll><span>Work</span></a>
+      <a href="#skills" class="overlay__link" data-scroll><span>Skills</span></a>
+      <a href="#experience" class="overlay__link" data-scroll><span>Experience</span></a>
+      <a href="#education" class="overlay__link" data-scroll><span>Education</span></a>
+      <a href="#contact" class="overlay__link" data-scroll><span>Contact</span></a>
+    </div>
+    <div class="overlay__aside">
+      <p class="overlay__tag">Software Engineer at MAQ Software — building large-scale platforms and high-performance backend systems in C# &amp; .NET.</p>
+      <a href="mailto:garv99goel15@gmail.com" class="overlay__cta">
+        <span>Let's talk</span>
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </a>
+      <a href="./assets/Garv_Goel_Resume.pdf" class="overlay__resume" data-resume download>
+        <span>Download CV</span>
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="overlay__socials">
+        <a href="https://github.com/garv99goel15" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/garv-goel-774a29213/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://leetcode.com/u/garv99goel15/" target="_blank" rel="noopener">LeetCode</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ░░░ Main ░░░ -->
+  <main class="content" id="content">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <button class="hero__arrow hero__arrow--prev" id="phasePrev" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="hero__arrow hero__arrow--next" id="phaseNext" type="button" aria-label="Next">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="hero__center">
+        <p class="hero__eyebrow" id="heroEyebrow">Hi, I'm Garv — a Software Engineer at MAQ Software.</p>
+        <h2 class="hero__title" id="heroTitle">
+          <span>Building</span><span>Scalable</span><span>Backend</span><span>Systems</span>
+        </h2>
+        <div class="hero__actions">
+          <button class="pill" id="heroCta" type="button">
+            <span class="pill__icon">✦</span>
+            <span class="pill__text">View my work</span>
+          </button>
+          <a class="pill pill--ghost" href="./assets/Garv_Goel_Resume.pdf" data-resume download>
+            <span class="pill__icon">↓</span>
+            <span class="pill__text">Download CV</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__stat" id="heroStat">
+        <span class="hero__stat-num" data-count="1000" data-suffix="+">0</span>
+        <span class="hero__stat-label">DSA problems solved · LeetCode Knight</span>
+      </div>
+
+      <div class="hero__scroll">
+        <span>Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about" id="about">
+      <div class="section__head">
+        <span class="section__index">01</span>
+        <span class="section__kicker">About</span>
+      </div>
+      <h3 class="about__statement reveal-lines">
+        A software engineer building large-scale platforms and high-performance backend systems — from architecture to production.
+      </h3>
+      <div class="about__grid">
+        <p class="about__lead reveal">
+          I'm Garv, a Software Engineer at MAQ Software working on a large-scale legal spend
+          management platform. I own features end-to-end in C# and ASP.NET Core, obsess over
+          performance at scale, and care deeply about clean architecture and reliable software.
+        </p>
+        <div class="about__facts">
+          <div class="fact reveal"><span class="fact__num" data-count="98" data-suffix="%">0</span><span class="fact__label">SQL query speed-up</span></div>
+          <div class="fact reveal"><span class="fact__num" data-count="90" data-suffix="M+">0</span><span class="fact__label">Records optimized</span></div>
+          <div class="fact reveal"><span class="fact__num" data-count="3" data-suffix="">0</span><span class="fact__label">Roles at MAQ Software</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WORK ===== -->
+    <section class="section work" id="work">
+      <div class="section__head">
+        <span class="section__index">02</span>
+        <span class="section__kicker">Selected Work</span>
+      </div>
+      <div class="work__list" id="workList">
+        <a class="card reveal" href="https://github.com/garv99goel15/mediroute" target="_blank" rel="noopener" data-color="#34d3ff">
+          <span class="card__no">01</span>
+          <div class="card__body">
+            <h4 class="card__title">MediRoute — Hospital Resource Navigator</h4>
+            <p class="card__desc">Real-time app that finds nearby hospitals with available ICU beds, OTs and specialists — ranked by a weighted score of availability and distance. SignalR live updates, JWT auth, caching, rate limiting and Serilog logging.</p>
+          </div>
+          <div class="card__meta"><span>ASP.NET Core 8</span><span>SignalR</span><span>EF Core</span><span>React 18</span></div>
+          <span class="card__arrow">↗</span>
+        </a>
+        <a class="card reveal" href="https://github.com/garv99goel15/vishvakarma" target="_blank" rel="noopener" data-color="#c6f135">
+          <span class="card__no">02</span>
+          <div class="card__body">
+            <h4 class="card__title">Vishvakarma — Autonomous Dev Agent</h4>
+            <p class="card__desc">A Spec-Driven Development agent that watches Jira, generates feature specs with LLMs, scaffolds code and raises PRs across Jira, Bitbucket &amp; Azure DevOps — with human-in-the-loop gates and a live React + Socket.io dashboard.</p>
+          </div>
+          <div class="card__meta"><span>TypeScript</span><span>Node.js</span><span>Socket.io</span><span>LLMs</span></div>
+          <span class="card__arrow">↗</span>
+        </a>
+        <a class="card reveal" href="https://github.com/garv99goel15" target="_blank" rel="noopener" data-color="#7b2ff7">
+          <span class="card__no">03</span>
+          <div class="card__body">
+            <h4 class="card__title">More on GitHub</h4>
+            <p class="card__desc">Explore more projects, experiments and open-source work — @garv99goel15.</p>
+          </div>
+          <div class="card__meta"><span>github.com/garv99goel15</span></div>
+          <span class="card__arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section skills" id="skills">
+      <div class="section__head">
+        <span class="section__index">03</span>
+        <span class="section__kicker">Capabilities</span>
+      </div>
+      <div class="skills__grid">
+        <div class="skillset reveal">
+          <h4 class="skillset__title">Languages</h4>
+          <ul><li>C#</li><li>Python</li><li>TypeScript / JavaScript</li><li>SQL</li><li>C++</li></ul>
+        </div>
+        <div class="skillset reveal">
+          <h4 class="skillset__title">Backend</h4>
+          <ul><li>ASP.NET Core</li><li>Node.js / Express</li><li>REST APIs</li><li>Stored Procedures</li><li>System Design</li></ul>
+        </div>
+        <div class="skillset reveal">
+          <h4 class="skillset__title">Frontend</h4>
+          <ul><li>React 18</li><li>TypeScript</li><li>Tailwind CSS</li><li>Office JS Add-ins</li></ul>
+        </div>
+        <div class="skillset reveal">
+          <h4 class="skillset__title">Cloud &amp; Tools</h4>
+          <ul><li>Azure (ADF, ADLS)</li><li>SQL Server</li><li>Git / Azure DevOps</li><li>CI/CD</li><li>Jira / Bitbucket</li></ul>
+        </div>
+      </div>
+      <div class="marquee" id="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>C#</span><span>•</span><span>ASP.NET Core</span><span>•</span><span>React 18</span><span>•</span><span>TypeScript</span><span>•</span><span>Azure</span><span>•</span><span>SQL Server</span><span>•</span><span>SignalR</span><span>•</span><span>Node.js</span><span>•</span><span>System Design</span><span>•</span><span>DSA</span><span>•</span>
+          <span>C#</span><span>•</span><span>ASP.NET Core</span><span>•</span><span>React 18</span><span>•</span><span>TypeScript</span><span>•</span><span>Azure</span><span>•</span><span>SQL Server</span><span>•</span><span>SignalR</span><span>•</span><span>Node.js</span><span>•</span><span>System Design</span><span>•</span><span>DSA</span><span>•</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section class="section experience" id="experience">
+      <div class="section__head">
+        <span class="section__index">04</span>
+        <span class="section__kicker">Experience</span>
+      </div>
+      <ol class="timeline">
+        <li class="tl reveal">
+          <span class="tl__year">Mar 2026 — Now</span>
+          <div class="tl__body">
+            <h4 class="tl__role">Software Engineer 2</h4>
+            <span class="tl__org">MAQ Software · Noida, India</span>
+            <p class="tl__desc">Leading feature development on a large-scale legal spend management platform — owning end-to-end delivery in C# / ASP.NET Core, driving architecture improvements and code reviews to cut technical debt.</p>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__year">Jul 2024 — Feb 2026</span>
+          <div class="tl__body">
+            <h4 class="tl__role">Software Engineer 1</h4>
+            <span class="tl__org">MAQ Software · Noida, India</span>
+            <p class="tl__desc">Cut a critical SQL query from 3h 40m to 2.5 minutes (98%+) on a 90M+ record dataset, and led the Electron → React Office Web Add-in migration. POC work secured a major client engagement.</p>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__year">Jan 2024 — Jul 2024</span>
+          <div class="tl__body">
+            <h4 class="tl__role">Associate Software Engineer · Intern</h4>
+            <span class="tl__org">MAQ Software · Noida, India</span>
+            <p class="tl__desc">Built an Azure ingestion pipeline (ADF + ADLS) feeding SQL Server, plus an internal .NET web app with upload, filtering and JavaScript-based business-rule workflows.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="section education" id="education">
+      <div class="section__head">
+        <span class="section__index">05</span>
+        <span class="section__kicker">Education</span>
+      </div>
+      <ol class="timeline">
+        <li class="tl reveal">
+          <span class="tl__year">2020 — 2024</span>
+          <div class="tl__body">
+            <h4 class="tl__role">B.Tech, Computer Science &amp; Engineering</h4>
+            <span class="tl__org">Dr. B. R. Ambedkar NIT · Jalandhar, Punjab</span>
+            <p class="tl__desc">Coursework across Data Structures &amp; Algorithms, DBMS, Operating Systems, System Design, OOP and Software Engineering.</p>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__year">Highlights</span>
+          <div class="tl__body">
+            <h4 class="tl__role">LeetCode Knight · 1000+ DSA</h4>
+            <span class="tl__org">Competitive Programming</span>
+            <p class="tl__desc">Solved 1000+ DSA problems and scored 99.38 percentile in JEE Mains 2020.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section contact" id="contact">
+      <div class="section__head">
+        <span class="section__index">06</span>
+        <span class="section__kicker">Contact</span>
+      </div>
+      <h3 class="contact__big reveal-lines">Let's build<br/>something great.</h3>
+
+      <form class="contact__form reveal" id="contactForm" novalidate>
+        <div class="field">
+          <input type="text" id="cfName" name="name" required autocomplete="name" placeholder=" " />
+          <label for="cfName">Your name</label>
+        </div>
+        <div class="field">
+          <input type="email" id="cfEmail" name="email" required autocomplete="email" placeholder=" " />
+          <label for="cfEmail">Email address</label>
+        </div>
+        <div class="field field--full">
+          <textarea id="cfMessage" name="message" rows="4" required placeholder=" "></textarea>
+          <label for="cfMessage">Tell me about your project or role</label>
+        </div>
+        <div class="contact__form-row">
+          <button type="submit" class="pill pill--solid" id="cfSubmit">
+            <span class="pill__text">Send message</span>
+            <span class="pill__icon">→</span>
+          </button>
+          <output class="form-status" id="formStatus" aria-live="polite"></output>
+        </div>
+      </form>
+
+      <p class="contact__or">or reach me directly</p>
+      <a class="contact__email" href="mailto:garv99goel15@gmail.com">garv99goel15@gmail.com</a>
+      <div class="contact__socials">
+        <a href="https://github.com/garv99goel15" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/garv-goel-774a29213/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://leetcode.com/u/garv99goel15/" target="_blank" rel="noopener">LeetCode</a>
+        <a href="tel:+918899044888">+91 88990 44888</a>
+      </div>
+      <footer class="footer">
+        <span>© <span id="year"></span> Garv Goel · Noida, India</span>
+        <span>Designed &amp; built with care · Inspired by immersive web</span>
+      </footer>
+    </section>
+
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
