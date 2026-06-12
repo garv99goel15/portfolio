@@ -293,76 +293,21 @@ function toast(message, ms = 4200) {
 }
 
 // ============================================================
-//  Résumé download guard — friendly message if file not added yet
+//  Résumé download — graceful fallback if the file is ever missing
 // ============================================================
 function initResume() {
-  $$('[data-resume]').forEach((link) => {
-    link.addEventListener('click', async (e) => {
-      const href = link.getAttribute('href');
-      try {
-        const res = await fetch(href, { method: 'HEAD' });
-        if (!res.ok) throw new Error('missing');
-      } catch {
+  const links = $$('[data-resume]');
+  if (!links.length) return;
+  let available = true; // assume present; verified once on load
+  const href = links[0].getAttribute('href');
+  fetch(href, { method: 'HEAD' }).then((r) => { available = r.ok; }).catch(() => { available = false; });
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (!available) {
         e.preventDefault();
-        toast('Résumé not added yet — drop your PDF at /assets/Garv_Goel_Resume.pdf');
+        toast('Résumé is temporarily unavailable — email me at garv99goel15@gmail.com.');
       }
     });
-  });
-}
-
-// ============================================================
-//  Contact form — Web3Forms (set a key) with mailto fallback
-// ============================================================
-const WEB3FORMS_KEY = ''; // paste your free access key from https://web3forms.com to enable async sending
-const CONTACT_EMAIL = 'garv99goel15@gmail.com';
-
-function initContactForm() {
-  const form = $('#contactForm');
-  if (!form) return;
-  const status = $('#formStatus');
-  const submit = $('#cfSubmit');
-
-  const setStatus = (msg, cls = '') => {
-    status.textContent = msg;
-    status.className = 'form-status' + (cls ? ' ' + cls : '');
-  };
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = $('#cfName').value.trim();
-    const email = $('#cfEmail').value.trim();
-    const message = $('#cfMessage').value.trim();
-
-    if (!name || !email || !message) { setStatus('Please fill in every field.', 'is-err'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setStatus('That email looks off — mind checking it?', 'is-err'); return; }
-
-    // No backend key configured → open the user's mail client, prefilled.
-    if (!WEB3FORMS_KEY) {
-      const subject = encodeURIComponent(`Portfolio message from ${name}`);
-      const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      setStatus('Opening your email app…', 'is-ok');
-      form.reset();
-      return;
-    }
-
-    // Async send via Web3Forms.
-    try {
-      setStatus('Sending…', 'is-busy');
-      submit.disabled = true;
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, name, email, message, subject: `Portfolio message from ${name}` }),
-      });
-      const data = await res.json();
-      if (data.success) { setStatus('Thanks! Your message is on its way. ✦', 'is-ok'); form.reset(); }
-      else { setStatus('Something went wrong — please email me directly.', 'is-err'); }
-    } catch {
-      setStatus('Network error — please email me directly.', 'is-err');
-    } finally {
-      submit.disabled = false;
-    }
   });
 }
 
@@ -377,7 +322,6 @@ function boot() {
   runLoader();
   initScroll();
   initResume();
-  initContactForm();
 
   els.enter.addEventListener('click', enter);
   els.menuBtn.addEventListener('click', () => toggleMenu());

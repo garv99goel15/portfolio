@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garv Goel — Résumé</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14101f;
+      --muted: #555;
+      --line: #e2e2ea;
+      --accent: #6a2cf5;
+      --accent-2: #1f9fb8;
+      --page: 210mm;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", system-ui, sans-serif; color: var(--ink); background: #d9d9e0;
+      line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .sheet {
+      width: var(--page); min-height: 297mm; margin: 24px auto; background: #fff;
+      padding: 18mm 16mm; box-shadow: 0 10px 40px rgba(0,0,0,.18);
+    }
+    /* Header */
+    .head { border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 16px; }
+    .name { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; }
+    .role { font-size: 14px; font-weight: 600; color: var(--accent); margin-top: 2px; letter-spacing: .04em; text-transform: uppercase; }
+    .contact { margin-top: 10px; font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+    .contact a { color: var(--accent-2); text-decoration: none; }
+    .contact span::before { content: "•"; margin-right: 14px; color: var(--line); }
+    .contact span:first-child::before { content: none; }
+    /* Sections */
+    section { margin-top: 18px; }
+    h2 {
+      font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+      border-bottom: 1px solid var(--line); padding-bottom: 5px; margin-bottom: 11px;
+    }
+    .entry { margin-bottom: 13px; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .entry__title { font-size: 15px; font-weight: 600; }
+    .entry__org { font-size: 13px; font-weight: 600; color: var(--accent-2); }
+    .entry__date { font-size: 12px; color: var(--muted); white-space: nowrap; font-weight: 500; }
+    ul { margin: 6px 0 0; padding-left: 17px; }
+    li { font-size: 12.7px; margin-bottom: 3px; color: #2b2b35; }
+    li strong { color: var(--ink); }
+    .stack { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    .stack b { color: var(--ink); font-weight: 600; }
+    .skills-grid { display: grid; grid-template-columns: 130px 1fr; gap: 4px 14px; font-size: 12.7px; }
+    .skills-grid dt { font-weight: 600; }
+    .skills-grid dd { color: #2b2b35; }
+    a { color: var(--accent-2); }
+    /* Floating download control — screen only */
+    .toolbar {
+      position: fixed; top: 18px; right: 18px; display: flex; gap: 10px; z-index: 10;
+    }
+    .toolbar button {
+      font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      padding: 11px 20px; box-shadow: 0 6px 20px rgba(106,44,245,.4);
+    }
+    .toolbar button:hover { filter: brightness(1.08); }
+    @media print {
+      body { background: #fff; }
+      .sheet { margin: 0; box-shadow: none; width: auto; min-height: auto; padding: 0; }
+      .toolbar { display: none; }
+      @page { size: A4; margin: 14mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar"><button onclick="window.print()">⤓ Save as PDF</button></div>
+
+  <div class="sheet">
+    <header class="head">
+      <div class="name">Garv Goel</div>
+      <div class="role">Software Engineer</div>
+      <div class="contact">
+        <span>Noida, Uttar Pradesh, India</span>
+        <span><a href="mailto:garv99goel15@gmail.com">garv99goel15@gmail.com</a></span>
+        <span>+91-8899044888</span>
+        <span><a href="https://www.linkedin.com/in/garv-goel-774a29213/">LinkedIn</a></span>
+        <span><a href="https://github.com/garv99goel15">GitHub</a></span>
+        <span><a href="https://leetcode.com/u/garv99goel15/">LeetCode</a></span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="entry__row">
+          <span class="entry__title">Software Engineer 2 — <span class="entry__org">MAQ Software</span></span>
+          <span class="entry__date">Mar 2026 – Present</span>
+        </div>
+        <ul>
+          <li>Leading feature development and system enhancements on a large-scale legal spend management platform, owning end-to-end delivery from design to production deployment.</li>
+          <li>Architecting new product functionalities in C# / ASP.NET Core, translating client requirements into scalable backend solutions with a focus on performance and code quality.</li>
+          <li>Led code reviews and architecture improvements to reduce technical debt and improve development velocity.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry__row">
+          <span class="entry__title">Software Engineer 1 — <span class="entry__org">MAQ Software</span></span>
+          <span class="entry__date">Jul 2024 – Feb 2026</span>
+        </div>
+        <ul>
+          <li>Conducted a POC that directly <strong>secured a major client engagement</strong> — evaluated technical feasibility of migrating a legacy legal spend platform, leading to project onboarding at MAQ Software.</li>
+          <li>Reduced SQL query execution time from <strong>3h 40m to 2.5 minutes (98%+ improvement)</strong> by rewriting critical queries on a 90M+ record dataset, eliminating daily processing bottlenecks.</li>
+          <li>Led migration of an Electron-based Office Add-in to a React-based Office Web Add-in over a 3–4 month team effort, modernizing the frontend stack and improving cross-platform compatibility.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry__row">
+          <span class="entry__title">Associate Software Engineer (Internship) — <span class="entry__org">MAQ Software</span></span>
+          <span class="entry__date">Jan 2024 – Jul 2024</span>
+        </div>
+        <ul>
+          <li>Built an Azure-based ingestion pipeline using ADF + ADLS to process recurring Excel uploads into SQL Server and developed a supporting internal .NET web application.</li>
+          <li>Enhanced an internal .NET application with upload workflows, filtering, and JavaScript-based business rule handling for ingested documents.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+
+      <div class="entry">
+        <div class="entry__row">
+          <span class="entry__title">MediRoute — Real-Time Hospital Resource Navigator</span>
+          <span class="entry__date">2026 · Ongoing</span>
+        </div>
+        <div class="stack"><b>Stack:</b> C# · ASP.NET Core 8 · SignalR · EF Core · React 18 · TypeScript · Tailwind CSS · JWT · Leaflet · xUnit</div>
+        <ul>
+          <li>Built a hospital discovery web app that helps patients find nearby hospitals with available ICU beds, OTs, and specialists, ranking results on a weighted score of availability and distance.</li>
+          <li>Designed the backend in ASP.NET Core 8 with EF Core, SignalR groups for live updates without polling, JWT auth with refresh tokens, in-memory caching, rate-limited endpoints, and Serilog structured logging.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry__row">
+          <span class="entry__title">Vishvakarma — Autonomous Dev Agent</span>
+          <span class="entry__date">2026 · Ongoing</span>
+        </div>
+        <div class="stack"><b>Stack:</b> TypeScript · Node.js · React 18 · Express.js · Socket.io · SQLite · GitHub Models API · Jira / Bitbucket / Azure DevOps APIs</div>
+        <ul>
+          <li>Built an autonomous Spec-Driven Development (SDD) agent that watches Jira boards, auto-generates feature specs from tickets using LLMs, scaffolds implementation, and raises PRs — with human approval only at key gates.</li>
+          <li>Designed a 7-step pipeline: spec generation → implementation plan → task breakdown → code scaffolding → branch creation → PR → ticket sync across Jira, Bitbucket, and Azure DevOps.</li>
+          <li>Built a real-time sprint dashboard using React 18 + Socket.io, giving engineering leads full pipeline visibility with live status updates and human-in-the-loop approval gates.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <dl class="skills-grid">
+        <dt>Languages</dt><dd>C#, Python, TypeScript, JavaScript, SQL, C++</dd>
+        <dt>Backend</dt><dd>ASP.NET Core, Node.js, Express.js, REST APIs, Stored Procedures, System Design</dd>
+        <dt>Frontend</dt><dd>React 18, TypeScript, Tailwind CSS, Office JS Add-ins</dd>
+        <dt>Cloud &amp; Tools</dt><dd>Azure (ADF, ADLS), SQL Server, Git, Azure DevOps, CI/CD, Jira, Bitbucket</dd>
+        <dt>CS Fundamentals</dt><dd>Data Structures &amp; Algorithms, OOP, DBMS, Operating Systems, Performance Optimization</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry__row">
+          <span class="entry__title">B.Tech in Computer Science &amp; Engineering</span>
+          <span class="entry__date">Jul 2020 – May 2024</span>
+        </div>
+        <div class="entry__org">Dr. B. R. Ambedkar National Institute of Technology, Jalandhar — Punjab, India</div>
+        <ul>
+          <li>Coursework: Data Structures &amp; Algorithms, DBMS, Operating Systems, System Design, OOP, Software Engineering.</li>
+          <li>Competitive Programming: <strong>LeetCode Knight</strong> | 1000+ DSA problems solved | Scored <strong>99.38 percentile</strong> in JEE Mains 2020.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

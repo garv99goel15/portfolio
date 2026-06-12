@@ -24,6 +24,7 @@ const MIME = {
   '.woff2': 'font/woff2',
   '.mp3': 'audio/mpeg',
   '.mp4': 'video/mp4',
+  '.pdf': 'application/pdf',
 };
 
 const server = http.createServer((req, res) => {
